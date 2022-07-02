@@ -45,6 +45,13 @@ function checkAnswer(currentLevel) {
     return result;
 }
 
+function startOver() {
+    level = 0;
+    started = false;
+    gamePattern = [];
+
+}
+
 $(".btn").click(function() {
     animatePress(this.id);
     var userChosenColour = this.id;
@@ -60,6 +67,14 @@ $(".btn").click(function() {
             }, 1000);
             userClickedPattern=[];
         }
+    else{
+        playSound("wrong");
+        $("body").addClass("game-over").dequeue().delay(200).queue(function () {
+        $(this).removeClass("game-over");
+        $("h1").text("Game Over, Press Any Key to Restart");
+        startOver();
+});
+    }
     }
 })
 
